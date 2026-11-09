@@ -1,6 +1,5 @@
-
 import pygame
-
+from game.resources import resource_path
 
 class Player:
 
@@ -36,7 +35,7 @@ class Player:
 
         # Load player sprite
         self.sprite = pygame.image.load(
-            "assets/images/player.png"
+            resource_path("assets/images/player.png")
         ).convert_alpha()
 
         # Resize sprite
@@ -47,7 +46,7 @@ class Player:
 
         # Jump sound effect
         self.jump_sound = pygame.mixer.Sound(
-            "assets/sounds/jump.wav"
+            resource_path("assets/sounds/jump.wav")
         )
         self.jump_sound.set_volume(0.5)
 

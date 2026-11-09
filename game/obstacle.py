@@ -1,6 +1,7 @@
 
 import pygame
 import random
+from game.resources import resource_path
 
 
 class Obstacle:
@@ -64,9 +65,9 @@ class Obstacle:
                 f"Unknown obstacle type: {self.obstacle_type}"
             )
 
-        # Load transparent PNG
+        # Load image using resource path
         self.image = pygame.image.load(
-            image_path
+            resource_path(image_path)
         ).convert_alpha()
 
         # Resize image

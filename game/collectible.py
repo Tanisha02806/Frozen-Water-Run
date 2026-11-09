@@ -1,6 +1,6 @@
 import pygame
 import random
-
+from game.resources import resource_path
 
 class Collectible:
 
@@ -21,7 +21,7 @@ class Collectible:
         self.speed = 6
 
         # Collection sound
-        self.collect_sound = pygame.mixer.Sound("assets/sounds/collect.wav")
+        self.collect_sound = pygame.mixer.Sound(resource_path("assets/sounds/collect.wav"))
         self.collect_sound.set_volume(0.6)
 
         # Sparkle effect

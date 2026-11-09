@@ -1,21 +1,29 @@
 
 import pygame
 
+from game.resources import resource_path
 from game.game import Game
 from game.player import Player
 from game.world import World
 from game.obstacle import Obstacle
-from ui.game_over import GameOverScreen
 from game.collectible import Collectible
+
+from ui.game_over import GameOverScreen
 from ui.menu import MenuScreen
 from ui.pause import PauseScreen
+
 
 # Initialize Pygame
 pygame.init()
 pygame.mixer.init()
-pygame.mixer.music.load("assets/sounds/background_music.mp3")
+
+# Background music
+pygame.mixer.music.load(
+    resource_path("assets/sounds/background_music.mp3")
+)
 pygame.mixer.music.set_volume(0.3)
 pygame.mixer.music.play(-1)
+
 
 # Window settings
 WIDTH = 1000
@@ -30,14 +38,18 @@ clock = pygame.time.Clock()
 # Create game objects
 game = Game()
 
-game_over_sound = pygame.mixer.Sound("assets/sounds/game_over.wav")
+game_over_sound = pygame.mixer.Sound(
+    resource_path("assets/sounds/game_over.wav")
+)
 game_over_sound.set_volume(0.6)
 
 player = Player()
 world = World()
 obstacle = Obstacle(650, 500)
+
 game_over_screen = GameOverScreen()
 collectible = Collectible(750, 420)
+
 menu_screen = MenuScreen()
 pause_screen = PauseScreen()
 
@@ -73,7 +85,7 @@ while game.running:
 
         # Check obstacle collision
         if obstacle.check_collision(player):
-            
+
             game_over_sound.play()
             game.change_state("game_over")
             print("GAME OVER!")
@@ -132,13 +144,14 @@ while game.running:
 
         game.draw_score(screen)
         game_over_screen.draw(screen)
-        
+
+    # Display pause screen
     elif game.game_state == "paused":
-        
+
         player.draw(screen)
         obstacle.draw(screen)
         collectible.draw(screen)
-        
+
         game.draw_score(screen)
         pause_screen.draw(screen)
 
